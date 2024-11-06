@@ -8,7 +8,14 @@ contract ABTCVault {
 
     event Transfer(address indexed to, uint256 amount);
 
-    event Withdraw(address indexed owner, uint256 amount);
+    event Redeem(address indexed user, uint256 amount, uint8 chainIndex);
+
+    mapping(address => RedeemRequest[]) public redeemRequests;
+    struct RedeemRequest {
+        address user;
+        uint256 amount;
+        uint8 chainIndex;
+    }
 
     constructor() {
         owner = msg.sender;
@@ -37,16 +44,19 @@ contract ABTCVault {
         emit Transfer(_to, _amount);
     }
 
-    function withdraw(uint256 _amount) external onlyOwner {
-        require(
-            address(this).balance >= _amount,
-            "Insufficient contract balance"
+    function redeem(uint8 _chainIndex) external payable {
+        require(msg.value > 0, "Redeem amount must be greater than zero");
+
+        // Record the redeem request for the user
+        redeemRequests[msg.sender].push(
+            RedeemRequest({
+                user: msg.sender,
+                amount: msg.value,
+                chainIndex: _chainIndex
+            })
         );
 
-        (bool success, ) = payable(owner).call{value: _amount}("");
-        require(success, "Withdraw failed");
-
-        emit Withdraw(owner, _amount);
+        emit Redeem(msg.sender, msg.value, _chainIndex);
     }
 
     function getBalance() external view returns (uint256) {

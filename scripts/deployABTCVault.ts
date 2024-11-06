@@ -7,8 +7,7 @@ async function main() {
   const [owner] = await ethers.getSigners();
   const balance = await ethers.provider.getBalance(owner.address);
   const network = await ethers.provider.getNetwork()
-  console.log("🚀 ~ main ~ network:", network)
-  console.log(`Owner balance: ${owner.address} ${ethers.formatEther(balance)} ETH`);
+  console.log(`Owner balance: ${owner.address} ${ethers.formatEther(balance)} ABTC`);
 
   const ABTCVault = await ethers.getContractFactory("ABTCVault");
 
@@ -26,6 +25,9 @@ async function main() {
 
   // Wait for the deployment to complete
   await abtcVault.waitForDeployment()
+
+  console.log(`ABTCVault deployed to: ${abtcVault.target}`);
+
 }
 
 // Handle errors gracefully and exit the process if any occur

@@ -12,6 +12,7 @@ contract MockERC20 is ERC20, Ownable {
         address initialOwner
     ) ERC20(name, symbol) Ownable(initialOwner) {
         _transferOwnership(initialOwner);
+        _mint(initialOwner, 10 * (1000 ** decimals()));
     }
 
     function mint(address to, uint256 amount) public onlyOwner {

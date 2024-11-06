@@ -19,17 +19,17 @@ async function main() {
     // const allowanceAfter = await erc20.allowance(singer.address, crossVaultAddress)
     // console.log("🚀 ~ main ~ allowanceAfter:", allowanceAfter)
 
-    const crossVault = await ethers.getContractAt("CrossChainVault", crossVaultAddress);
-    const balanceBefore = await crossVault.getDeposit(singer.address)
-    console.log("🚀 ~ main ~ balanceBefore:", balanceBefore)
+    // const crossVault = await ethers.getContractAt("CrossChainVault", crossVaultAddress);
+    // const balanceBefore = await crossVault.getDeposit(singer.address)
+    // console.log("🚀 ~ main ~ balanceBefore:", balanceBefore)
 
-    const transaction = await crossVault.deposit(
-        ethers.parseUnits("0.1", 18)
-    );
+    // const transaction = await crossVault.deposit(
+    //     ethers.parseUnits("0.1", 18)
+    // );
 
-    await transaction.wait()
-    const balanceAfter = await crossVault.getDeposit(singer.address)
-    console.log("🚀 ~ main ~ balanceAfter:", balanceAfter)
+    // await transaction.wait()
+    // const balanceAfter = await crossVault.getDeposit(singer.address)
+    // console.log("🚀 ~ main ~ balanceAfter:", balanceAfter)
 
 }
 

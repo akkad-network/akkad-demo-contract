@@ -10,12 +10,16 @@ const config: HardhatUserConfig = {
   solidity: "0.8.27",
   networks: {
     holesky: {
-      url: `https://holesky.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
+      url: `https://eth-holesky.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`,
       accounts: [`0x${process.env.PRIVATE_KEY}`],
     },
     sepolia: {
-      url: `https://sepolia.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
-      accounts: [`0x${process.env.PRIVATE_KEY}`],
+      url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`,
+      accounts: [`0x${process.env.SEPOLIA_PRIVATE_KEY}`],
+    },
+    bsc: {
+      url: `https://eth-bsc.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`,
+      accounts: [`0x${process.env.SEPOLIA_PRIVATE_KEY}`],
     },
     akkad: {
       url: "https://rpc-testnet.akkad.network",
@@ -26,6 +30,7 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       holesky: process.env.ETHERSCAN_API_KEY || '',
+      sepolia: process.env.ETHERSCAN_API_KEY || '',
       akkad: 'dum-api'
     },
     customChains: [
